@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDMD</title>
+    <link rel="icon" type="image/x-icon" href="add logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        body { background-color: #FCE4EC; }
+        .blob-bg { background: linear-gradient(135deg, #FFB199 0%, #FF8AAB 100%); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .purple-card { background: linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%); }
+        .submit-btn { background: linear-gradient(to right, #F06292, #FFB199); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="w-full md:w-1/2">
+            <h1 class="text-4xl font-bold text-purple-800 mb-2">Get in touch</h1>
+            <div class="h-1 w-24 bg-purple-400 mb-8"></div>
+
+            <form id="contact-form" class="space-y-4">
+                <input type="text" name="user_name" placeholder="Your Name" required
+                    class="w-full p-4 rounded-3xl border-none bg-white shadow-sm outline-none">
+                
+                <input type="email" name="user_email" placeholder="Your Email" required
+                    class="w-full p-4 rounded-3xl border-none bg-white shadow-sm outline-none">
+                
+                <textarea name="message" placeholder="Your Message" rows="6" required
+                    class="w-full p-6 rounded-3xl border-none bg-white shadow-sm outline-none resize-none"></textarea>
+
+                <button type="submit" id="btn-text" class="submit-btn text-white px-8 py-3 rounded-full flex items-center gap-2 shadow-lg">
+                    Submit <span>→</span>
+                </button>
+            </form>
+            <p id="status-msg" class="mt-4 font-medium"></p>
+        </div>
+
+        <img src="right_img.png" alt="png">
+
+    <script type="text/javascript">
+        // REPLACE THESE THREE VALUES
+        const PUBLIC_KEY = "Public key"; 
+        const SERVICE_ID = "service_id";
+        const TEMPLATE_ID = "template_id";
+
+        (function() {
+            emailjs.init(PUBLIC_KEY);
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('btn-text');
+            const status = document.getElementById('status-msg');
+            
+            btn.innerText = "Sending...";
+            status.innerText = "";
+
+            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
+                .then(function() {
+                    btn.innerText = "Submit →";
+                    status.style.color = "green";
+                    status.innerText = "✓ Sent! Check your Gmail inbox.";
+                    document.getElementById('contact-form').reset();
+                }, function(error) {
+                    btn.innerText = "Submit →";
+                    status.style.color = "red";
+                    status.innerText = "Error: Check Console (F12)";
+                    console.error("FAILED...", error);
+                    alert("EmailJS Error: " + error.text);
+                });
+        });
+    </script>
+</body>
+</html>
