@@ -11,4 +11,5 @@ Subscribe Mr. Coder chanal ▶ 𝚈𝚘𝚞𝚝𝚞𝚋𝚎
 Thank you❤
 
 
-https://raw.githubusercontent.com/comfo1405-droid/email-sender/refs/heads/main/right_img.png
+
+<img width="714" height="584" alt="right_img" src="https://github.com/user-attachments/assets/ed08b833-631b-4c26-b685-077f4fbcdcdd" />
